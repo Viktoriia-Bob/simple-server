@@ -19,7 +19,7 @@ jobs:
     - name: Tag docker image
       run: docker tag simple-server:latest simple-server:${{ github.run_number }}
     - name: Remove old docker node
-      run: docker stop rabbitmq || true && docker rm simple-server || true
+      run: docker stop simple-server || true && docker rm simple-server || true
     - name: Startup
       run: npm run docker-run
     - name: Deploy to Server
