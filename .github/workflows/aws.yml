@@ -18,14 +18,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
         run: echo "$EC2_SSH_KEY" > "id_rsa.pem" && chmod 400 id_rsa.pem
       - name: Connect to EC2 instance via ssh and pull changes
-        run: ssh -o StrictHostKeyChecking=no -i id_rsa.pem ubuntu@3.74.199.139 "cat app.js"
-#      - name: Run app
-#        run: npm start
-#      - name: Build docker image
-#        run: docker build -t simple-server .
-#      - name: Tag docker image
-#        run: docker tag simple-server:latest simple-server:${{ github.run_number }}
-#      - name: Remove old docker node
-#        run: docker stop simple-server || true && docker rm simple-server || true
-#      - name: Startup
-#        run: npm run docker-run && curl 2ip.ru
+        run: ssh -o StrictHostKeyChecking=no -i id_rsa.pem ubuntu@3.74.199.139 "cd /home/ubuntu/simple_server && git checkout master -f && sudo git pull && docker build -t simple-server . && docker stop simple-server || true && docker rm simple-server || true && npm run docker-run"
