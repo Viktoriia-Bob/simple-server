@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('Hello, friend');
+  res.send('Hello, friend. Version 2.0');
 });
 
 const port = process.env.PORT || '3000';
