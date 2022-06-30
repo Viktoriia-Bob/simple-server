@@ -14,11 +14,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      
     - name: Build docker image
       run: docker build -t simple-server .
-    - name: Run docker image
+    - name: Tag docker image
       run: docker tag simple-server:latest simple-server:${{ github.run_number }}
+    - name: Remove old docker node
+      run: docker kill simple-server && docker rm simple-server
     - name: Startup
       run: npm run docker-run
     - name: Deploy to Server
