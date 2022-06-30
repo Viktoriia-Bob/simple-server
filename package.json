@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "docker-build": "sudo docker build -t getting-started .",
+    "docker-run": "sudo docker run -dp 3000:3000 getting-started"
   },
   "dependencies": {
     "cookie-parser": "1.4.4",

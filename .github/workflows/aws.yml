@@ -5,9 +5,6 @@ on:
     branches:
       - "master"
 
-permissions:
-  contents: read
-
 jobs:
   deploy:
     name: Deploy to EC2
@@ -22,7 +19,8 @@ jobs:
       run: docker build -t simple-server .
     - name: Run docker image
       run: docker tag simple-server:latest simple-server:${{ github.run_number }}
-      
+    - name: Startup
+      run: npm run docker-run
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@main
       env:
