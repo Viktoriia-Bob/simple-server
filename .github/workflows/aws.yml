@@ -19,9 +19,7 @@ jobs:
         run: echo "$EC2_SSH_KEY" > "id_rsa.pem"
       - name: Connect to EC2 instance via ssh and pull changes
         run: chmod 400 id_rsa.pem && ssh -o StrictHostKeyChecking=no -i id_rsa.pem ubuntu@3.74.199.139 "
-        cd /home/ubuntu/simple_server &&
-        git checkout master -f &&
-        sudo git pull"
+        cat app.js"
       - name: Run app
         run: npm start
 #      - name: Build docker image
