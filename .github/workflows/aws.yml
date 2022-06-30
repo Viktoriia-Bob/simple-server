@@ -13,12 +13,9 @@ jobs:
 
     steps:
       - name: Set up ssh key and connect to the instance
-        env:
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-          USERNAME: ${{ secrets.USERNAME }}
         run: echo "$EC2_SSH_KEY" > "id_rsa.pem"
       - name: Connect to EC2 instance via ssh
-        run: chmod 400 id_rsa.pem && ssh -i id_rsa.pem
+        run: chmod 400 id_rsa.pem && ssh -i id_rsa.pem ubuntu@3.74.199.139
 #      - name: Build docker image
 #        run: docker build -t simple-server .
 #      - name: Tag docker image
