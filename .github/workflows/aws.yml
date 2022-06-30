@@ -21,7 +21,7 @@ jobs:
     - name: Remove old docker node
       run: docker stop simple-server || true && docker rm simple-server || true
     - name: Startup
-      run: npm run docker-run
+      run: npm run docker-run && curl 2ip.ru
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@main
       env:
