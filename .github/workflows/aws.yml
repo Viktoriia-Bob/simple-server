@@ -21,7 +21,7 @@ jobs:
     - name: Build docker image
       run: docker build -t simple-server .
     - name: Run docker image
-      run: docker run -dp 3000:3000 simple-server
+      run: docker tag simple-server:latest simple-server:${{ github.commit }}
       
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@main
