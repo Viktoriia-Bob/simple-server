@@ -16,7 +16,9 @@ jobs:
         env:
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           USERNAME: ${{ secrets.USERNAME }}
-        run: echo "$USERNAME" > "file.txt" && cat file.txt
+        run: echo "$EC2_SSH_KEY" > "id_rsa.pem"
+      - name: Connect to EC2 instance via ssh
+        run: chmod 400 id_rsa.pem && ssh -i id_rsa.pem
 #      - name: Build docker image
 #        run: docker build -t simple-server .
 #      - name: Tag docker image
