@@ -12,20 +12,15 @@ jobs:
     environment: production
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Build docker image
-      run: docker build -t simple-server .
-    - name: Tag docker image
-      run: docker tag simple-server:latest simple-server:${{ github.run_number }}
-    - name: Remove old docker node
-      run: docker stop simple-server || true && docker rm simple-server || true
-    - name: Startup
-      run: npm run docker-run && curl 2ip.ru
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.HOST_DNS }}
-        REMOTE_USER: ${{ secrets.USERNAME }}
-        TARGET: ${{ secrets.TARGET_DIR }}
+      - name: Set up ssh key and connect to the instance
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: echo "$EC2_SSH_KEY"
+#      - name: Build docker image
+#        run: docker build -t simple-server .
+#      - name: Tag docker image
+#        run: docker tag simple-server:latest simple-server:${{ github.run_number }}
+#      - name: Remove old docker node
+#        run: docker stop simple-server || true && docker rm simple-server || true
+#      - name: Startup
+#        run: npm run docker-run && curl 2ip.ru
