@@ -16,6 +16,8 @@ jobs:
         env:
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           USERNAME: ${{ secrets.USERNAME }}
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          GITHUB_OWNER_NAME: $${{ secrets.GITHUB_OWNER_NAME }}
         run: echo "$EC2_SSH_KEY" > "id_rsa.pem" && chmod 400 id_rsa.pem
       - name: Connect to EC2 instance via ssh and pull changes
-        run: ssh -o StrictHostKeyChecking=no -i id_rsa.pem ubuntu@3.74.199.139 "cd /home/ubuntu/simple-server && sudo git checkout master -f && sudo git pull && npm run docker-down && sudo docker-compose up --build -d"
+        run: ssh -o StrictHostKeyChecking=no -i id_rsa.pem ubuntu@3.74.199.139 "cd /home/ubuntu/simple-server && git remote set-url origin https://$GITHUB_OWNER_NAME:$GITHUB_ACCESS_TOKEN@github.com/Viktoriia-Bob/simple-server.git && sudo git checkout master -f && sudo git pull && npm run docker-down && sudo docker-compose up --build -d"
