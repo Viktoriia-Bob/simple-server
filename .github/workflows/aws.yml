@@ -15,7 +15,8 @@ jobs:
       - name: Set up ssh key and connect to the instance
         env:
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-        run: echo "$EC2_SSH_KEY"
+          USERNAME: ${{ secrets.USERNAME }}
+        run: echo "$USERNAME" > "file.txt" && cat file.txt
 #      - name: Build docker image
 #        run: docker build -t simple-server .
 #      - name: Tag docker image
