@@ -5,8 +5,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "docker-build": "sudo docker build -t simple-server .",
-    "docker-run": "sudo docker run -d -p 3000:3000 --name=simple-server simple-server"
+    "docker-build": "sudo docker-compose build",
+    "docker-run": "sudo docker-compose up -d",
+    "docker-down": "sudo docker-compose down"
   },
   "dependencies": {
     "cookie-parser": "1.4.4",
